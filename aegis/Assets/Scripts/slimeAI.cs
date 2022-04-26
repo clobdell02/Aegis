@@ -10,12 +10,15 @@ public class slimeAI : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-    }
+    { }
 
     // Update is called once per frame
     void Update()
     {
-        slime.SetDestination(Player.position);
+        var distance = Vector3.Distance(Player.position, transform.position);
+        if (distance <= 5)
+        {
+            slime.SetDestination(Player.position);
+        }
     }
 }
