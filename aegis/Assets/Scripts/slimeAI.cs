@@ -7,6 +7,7 @@ public class slimeAI : MonoBehaviour
 {
     public NavMeshAgent slime;
     public Transform Player;
+    static bool enemyHit;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +23,3 @@ public class slimeAI : MonoBehaviour
         }
     }
 }
-
-//public class SelectableEnemies : MonoBehaviour
-//{
-    // used for shockwave powerup
-//}

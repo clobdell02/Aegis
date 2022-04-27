@@ -8,14 +8,14 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Rigidbody rb;
     private Vector3 playerVelocity;
-    private bool inDash = false;
+    static public bool inDash = false;
     private float dashTime = 0.3f;
     private float currTime = 0.0f;
     public float gravityValue = -9.8f;
     private float playerSpeed = 4.0f;
     private int lives = 3;
     public TextMeshProUGUI livesText;
-
+    public static bool enemyHit;
     // powerup variables:
     [SerializeField] private List<SelectableEnemies> selectables;
     private bool shockwave = false;
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         livesText.text = $"Lives: {lives}";
     }
-    
+
     void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -44,18 +44,18 @@ public class PlayerController : MonoBehaviour
         // if we are currently dashing, hijack the update function to dash
         if (inDash)
         {
-            Debug.Log("Dashing!");
+            //Debug.Log("Dashing!");
             // dash for dashTime seconds
             currTime += Time.deltaTime;
             if (currTime < dashTime)
             {
                 // this value determines how fast the player dashes
-                controller.Move(move / 16);
+                controller.Move(move / 10);
             }
             // if we have been dashing for dashTime seconds then we are no longer dashing
             else
             {
-                Debug.Log("Done dashing.");
+                //Debug.Log("Done dashing.");
                 inDash = false;
                 currTime = 0;
             }
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         // shockwave power up attack
         if (Input.GetKeyDown("p") && (shockwave == true))
         {
-            Debug.Log("P pushed");
+            //Debug.Log("P pushed");
             // force for pushing back
             float force = 750.0f;
 
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("enemy"))
         {
-            Debug.Log("Hit enemy!");
+            //Debug.Log("Hit enemy!");
             if (lives > 0)
             {
                 lives -= 1;
