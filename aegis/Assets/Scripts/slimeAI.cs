@@ -22,3 +22,8 @@ public class slimeAI : MonoBehaviour
         }
     }
 }
+
+//public class SelectableEnemies : MonoBehaviour
+//{
+    // used for shockwave powerup
+//}

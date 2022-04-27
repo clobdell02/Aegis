@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CollEvnt
+  - Shockwave
+  - enemy
   layers:
   - Default
   - TransparentFX
