@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private float dashTime = 0.3f;
     private float currTime = 0.0f;
     public float gravityValue = -9.8f;
-    public float playerSpeed = 2.5f;
+    private float playerSpeed = 4.0f;
 
     // powerup variables:
     [SerializeField] private List<SelectableEnemies> selectables;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         if (currTime < dashTime)
         {
             // this value determines how fast the player dashes
-            controller.Move(move / 64);
+            controller.Move(move / 16);
         }
         // if we have been dashing for dashTime seconds then we are no longer dashing
         else
@@ -51,9 +51,9 @@ public class PlayerController : MonoBehaviour
             currTime = 0;
         }
         }
-      
+
         if (!inDash)
-        {      
+        {
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         if(move != Vector3.zero)
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
                     //dir = -dir.normalized;
                     //Debug.Log(dir);
 
-                    // add force in the direction of dir and multiply it by force. 
+                    // add force in the direction of dir and multiply it by force.
                     selectables[i].rb.AddForce(dir * force);
                     Debug.Log(dir * force);
                 }
