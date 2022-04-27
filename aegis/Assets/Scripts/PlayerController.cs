@@ -77,29 +77,34 @@ public class PlayerController : MonoBehaviour
         // shockwave power up attack
         if (Input.GetKeyDown("p") && (shockwave == true))
         {
-            //Debug.Log("P pushed");
+            Debug.Log("Shockwave used!");
             // force for pushing back
             float force = 750.0f;
 
             // detect enemies in a given range of the player
-            float range = 2.5f;
+            float range = 5.0f;
             for (int i = 0; i < selectables.Count; i++)
             {
-                var distance = Vector3.Distance(selectables[i].transform.position, transform.position);
-                Debug.Log(distance);
-                if (distance <= range)
+                // check for null
+                if (selectables[i] == null)
                 {
-                    // Calculate Angle Between the collision point and the player
-                    Vector3 dir = selectables[i].transform.position - transform.position;
-                    Debug.Log(dir);
+                    selectables.Remove(selectables[i]);
+                }
+                else
+                {
+                    var distance = Vector3.Distance(selectables[i].transform.position, transform.position);
+                    if (distance <= range)
+                    {
+                        // Calculate Angle Between the collision point and the player
+                        Vector3 dir = selectables[i].transform.position - transform.position;
 
-                    // get the opposite (-Vector3) and normalize it
-                    //dir = -dir.normalized;
-                    //Debug.Log(dir);
+                        // get the opposite (-Vector3) and normalize it
+                        //dir = -dir.normalized;
+                        //Debug.Log(dir);
 
-                    // add force in the direction of dir and multiply it by force.
-                    selectables[i].rb.AddForce(dir * force);
-                    Debug.Log(dir * force);
+                        // add force in the direction of dir and multiply it by force.
+                        selectables[i].rb.AddForce(dir * force);
+                    }
                 }
             }
             shockwave = false;
