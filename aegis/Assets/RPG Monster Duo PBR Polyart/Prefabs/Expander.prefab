@@ -304,7 +304,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3ad386aba28716448079dcf67d7aede, type: 2}
+  - {fileID: 2100000, guid: 9d022419763382b4ba0ed107dec01b80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -803,8 +803,8 @@ GameObject:
   - component: {fileID: 4906828391645816}
   - component: {fileID: 95237074988894122}
   m_Layer: 0
-  m_Name: TurtleShellPBR
-  m_TagString: Untagged
+  m_Name: Expander
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
