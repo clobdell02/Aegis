@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 9569962}
   - component: {fileID: 3425068636355982732}
   - component: {fileID: 8447028815517309680}
+  - component: {fileID: 685572904313863792}
   m_Layer: 0
   m_Name: TT_RTS_Demo_Character
   m_TagString: Player
@@ -311,6 +312,24 @@ CapsuleCollider:
   m_Height: 2.1
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!143 &685572904313863792
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121574}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &131548
 GameObject:
   m_ObjectHideFlags: 0
