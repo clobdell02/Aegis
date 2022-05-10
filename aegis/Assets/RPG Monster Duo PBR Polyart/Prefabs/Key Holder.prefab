@@ -393,10 +393,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4023215848608658}
   - component: {fileID: 7498090576649048079}
+  - component: {fileID: 1440627812140276920}
   - component: {fileID: 1353513951936509775}
   - component: {fileID: 2804734530055209466}
-  - component: {fileID: 7358164455559617519}
   - component: {fileID: 6196509056130034667}
+  - component: {fileID: 6364378510769326754}
   m_Layer: 0
   m_Name: Key Holder
   m_TagString: Key Enemy
@@ -432,9 +433,25 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!54 &1440627812140276920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919012471076396}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.75
+  m_AngularDrag: 0.2
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!195 &1353513951936509775
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -470,19 +487,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
---- !u!114 &7358164455559617519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919012471076396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88d61ce843285d94ca39525c299e56dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
 --- !u!114 &6196509056130034667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,8 +501,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   Player: {fileID: 0}
-  speed: 3.85
+  speed: 3.5
   obstacleRange: 3
+--- !u!114 &6364378510769326754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919012471076396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0065b95e679cf9547ab677b1bae955f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  key: {fileID: 0}
 --- !u!1 &1989916952965676
 GameObject:
   m_ObjectHideFlags: 0
