@@ -10,8 +10,9 @@ public class KnockbackOnCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-      if(PlayerController.inDash)
+      if(ThirdPersonDash.inDash)
       {
+        Debug.Log("Player in Dash!");
         Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
 
         if(rb != null)
