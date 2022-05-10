@@ -11,13 +11,13 @@ public class Death : MonoBehaviour
 
     void Start()
     {
-        lives = PlayerController.lives;
+        lives = PlayerControllerv2.lives;
     }
 
     // Update is called once per frame
     void Update()
     {
-        int currentLives = PlayerController.lives;
+        int currentLives = PlayerControllerv2.lives;
         if (currentLives != lives)
         {
             Debug.Log("Lives changed!");
