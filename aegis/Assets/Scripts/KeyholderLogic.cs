@@ -7,7 +7,10 @@ public class KeyholderLogic : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform Player;
-    static bool hit;
+    public float speed = 5.0f;
+    public float obstacleRange = 5.0f;
+    private float changeDirectionTimer = 1.5f;
+    private float timer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,10 +19,34 @@ public class KeyholderLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var distance = Vector3.Distance(Player.position, transform.position);
-        if (distance <= 5)
+        transform.Translate(0, 0, speed * Time.deltaTime);
+        var dist = Vector3.Distance(Player.position, transform.position);
+        Ray lookAhead = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        if (Physics.SphereCast(lookAhead, 0.75f, out hit))
         {
-            agent.SetDestination(-(Player.position));
+            if(hit.distance < obstacleRange)
+            {
+                float angle = Random.Range(-90, 90);
+                transform.Rotate(0, angle, 0);
+            }
+            if (dist <= obstacleRange && hit.collider.gameObject.CompareTag("Player"))
+            {
+                float angle = Random.Range(170, 190);
+                transform.Rotate(0, angle, 0);
+            }
+            timer = changeDirectionTimer;
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+            if (timer > 0)
+                return;
+            else
+            {
+                float angle = Random.Range(-110, 110);
+                transform.Rotate(0, angle, 0);
+            }
         }
     }
 }

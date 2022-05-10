@@ -8,6 +8,7 @@ TagManager:
   - Shockwave
   - enemy
   - Key Enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX
