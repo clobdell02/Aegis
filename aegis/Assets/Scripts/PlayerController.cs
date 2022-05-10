@@ -13,7 +13,11 @@ public class PlayerController : MonoBehaviour
     private float currTime = 0.0f;
     public float gravityValue = -9.8f;
     private float playerSpeed = 4.0f;
-    private int lives = 3;
+    static public int lives = 3;
+    private int invincibilityFrames = 120;
+    private int invincibilityCount = 0;
+    private bool isHit = false;
+
     public TextMeshProUGUI livesText;
     public static bool enemyHit;
     // powerup variables:
@@ -74,6 +78,19 @@ public class PlayerController : MonoBehaviour
             controller.Move(playerVelocity * Time.deltaTime);
         }
 
+        if (isHit)
+        {
+            if (invincibilityCount < invincibilityFrames) 
+            {
+                invincibilityCount += 1;
+            }
+            else 
+            {
+                invincibilityCount = 0;
+                isHit = false;
+            }
+        }
+
         // shockwave power up attack
         if (Input.GetKeyDown("p") && (shockwave == true))
         {
@@ -122,11 +139,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("enemy"))
         {
             //Debug.Log("Hit enemy!");
-            if (lives > 0)
+            if (lives > 0 && !isHit)
             {
                 lives -= 1;
                 SetLivesText();
             }
+            isHit = true;
         }
     }
 

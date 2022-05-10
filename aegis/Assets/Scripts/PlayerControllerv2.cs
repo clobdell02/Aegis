@@ -17,7 +17,7 @@ public class PlayerControllerv2 : MonoBehaviour
   [SerializeField] private List<SelectableEnemies> selectables;
   private bool shockwave = false;
   public static bool enemyHit;
-  private int lives = 3;
+  public static int lives = 3;
 
     void SetLivesText()
     {
