@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KeyPickUp : MonoBehaviour
 {
-    public float keyCount = 0.0f; // used to track the amount of keys a player has picked up
+    static public float keyCount = 0.0f; // used to track the amount of keys a player has picked up
 
     // Start is called before the first frame update
     void Start()
