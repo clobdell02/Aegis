@@ -19,16 +19,16 @@ public class ThirdPersonDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inDash = false;
         if(Input.GetMouseButtonDown(0))
         {
           StartCoroutine(Dash());
         }
+        inDash = false;
     }
 
     IEnumerator Dash()
     {
-      
+
       float startTime = Time.time;
 
       while(Time.time < startTime + dashTime)
@@ -37,5 +37,7 @@ public class ThirdPersonDash : MonoBehaviour
         moveScript.controller.Move(moveScript.moveDir * dashSpeed * Time.deltaTime);
         yield return null;
       }
+
+      inDash = false;
     }
 }
