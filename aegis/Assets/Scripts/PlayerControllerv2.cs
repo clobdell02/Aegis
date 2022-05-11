@@ -102,6 +102,7 @@ public class PlayerControllerv2 : MonoBehaviour
             shockwave = true;
             SetLivesText();
         }
+
         if (other.gameObject.CompareTag("Health "))
         {
             other.gameObject.SetActive(false);
