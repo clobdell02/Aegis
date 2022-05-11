@@ -18,6 +18,7 @@ public class PlayerControllerv2 : MonoBehaviour
   private bool shockwave = false;
   public static bool enemyHit;
   public static int lives = 3;
+  private Animator animator;
 
     void SetLivesText()
     {
@@ -28,7 +29,7 @@ public class PlayerControllerv2 : MonoBehaviour
     void Start()
     {
       livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
-
+      animator = GetComponent<Animator>();
       SetLivesText();
     }
 
@@ -37,6 +38,12 @@ public class PlayerControllerv2 : MonoBehaviour
     {
       float horizontal = Input.GetAxisRaw("Horizontal");
       float vertical = Input.GetAxisRaw("Vertical");
+
+      bool hasHorizontalInput = !Mathf.Approximately(horizontal, 0f);
+      bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+      bool isWalking = (hasHorizontalInput || hasVerticalInput) && !ThirdPersonDash.inDash;
+
+      animator.SetBool("IsWalking", isWalking);
 
       Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 

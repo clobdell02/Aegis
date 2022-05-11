@@ -28,6 +28,7 @@ public class ThirdPersonDash : MonoBehaviour
 
     IEnumerator Dash()
     {
+      
       float startTime = Time.time;
 
       while(Time.time < startTime + dashTime)
