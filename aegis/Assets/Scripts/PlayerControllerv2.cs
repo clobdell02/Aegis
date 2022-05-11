@@ -81,10 +81,6 @@ public class PlayerControllerv2 : MonoBehaviour
                       // Calculate Angle Between the collision point and the player
                       Vector3 dir = selectables[i].transform.position - transform.position;
 
-                      // get the opposite (-Vector3) and normalize it
-                      //dir = -dir.normalized;
-                      //Debug.Log(dir);
-
                       // add force in the direction of dir and multiply it by force.
                       selectables[i].rb.AddForce(dir * force);
                   }
@@ -102,6 +98,7 @@ public class PlayerControllerv2 : MonoBehaviour
             shockwave = true;
             SetLivesText();
         }
+
         if (other.gameObject.CompareTag("Health"))
         {
             other.gameObject.SetActive(false);
@@ -109,7 +106,7 @@ public class PlayerControllerv2 : MonoBehaviour
             SetLivesText();
         }
 
-            if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Projectile"))
+        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Projectile"))
         {
             //Debug.Log("Hit enemy!");
             if (lives > 0)

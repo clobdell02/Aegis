@@ -8,6 +8,7 @@ public class slimeAI : MonoBehaviour
     public NavMeshAgent slime;
     public Transform Player;
 
+    private float speed = 2.75f;
     private bool _rest;
     private bool _chase;
     //private bool _attack;
@@ -46,7 +47,8 @@ public class slimeAI : MonoBehaviour
                 _attack = true;
                 _chase = false;
             }
-            else*/ if (distance > 10)
+            else*/ 
+            if (distance > 10)
             {
                 _rest = true;
                 _chase = false;
@@ -54,12 +56,12 @@ public class slimeAI : MonoBehaviour
             else
             {
                 transform.LookAt(Player);
-                slime.transform.position = transform.TransformPoint(Vector3.forward * 0.015f);
+                transform.Translate(0, 0, speed * Time.deltaTime);
+                //slime.transform.position = transform.TransformPoint(Vector3.forward * 0.035f);
                 //slime.transform.rotation = transform.rotation;
                 //slime.SetDestination(Player.position);
             }
         }
-
         // needed later for animations
         /*if (_attack)
         {
