@@ -30,6 +30,7 @@ public class PlayerControllerv2 : MonoBehaviour
     void Start()
     {
       lives = 3;
+      KeyPickUp.keyCount = 0.0f;
       livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
       animator = GetComponent<Animator>();
       SetLivesText();
