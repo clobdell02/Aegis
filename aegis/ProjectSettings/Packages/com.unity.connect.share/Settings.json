@@ -21,7 +21,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/clobd/Documents/Aegis/aegis/WebGL Builds;C:/Users/cpend/Schoolwork/Aegis/aegis/Builds;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/clobd/Documents/Aegis/aegis/WebGL Builds/Build;C:/Users/clobd/Documents/Aegis/aegis/WebGL Builds;C:/Users/cpend/Schoolwork/Aegis/aegis/Builds;;;;;;;\"}"
             }
         ]
     }

@@ -10,7 +10,6 @@ public class ShooterAI : MonoBehaviour
 
     [SerializeField] private GameObject ProjectilePrefab;
     private GameObject _Projectile;
-    //private float enemyBulletSpeed = 8.0f;
     private float cooldownTimer;
     private float restTimer = 5.0f;
 
@@ -40,7 +39,6 @@ public class ShooterAI : MonoBehaviour
         {
             if (distance <= 10)
             {
-                Debug.Log("Wander from rest");
                 _wander = true;
                 _rest = false;
             }
@@ -60,13 +58,11 @@ public class ShooterAI : MonoBehaviour
         {
             if (distance <= 15)
             {
-                Debug.Log("Attack from wander");
                 _engaged = true;
                 _wander = false;
             }
             if (distance >= 30)
             {
-                Debug.Log("Rest from wander");
                 _rest = true;
                 _engaged = false;
                 _wander = false;
@@ -107,7 +103,6 @@ public class ShooterAI : MonoBehaviour
             }
             else
             {
-                Debug.Log("Wander from attack");
                 _wander = true;
                 _engaged = false;
             }
@@ -119,8 +114,7 @@ public class ShooterAI : MonoBehaviour
         cooldownTimer -= Time.deltaTime;
         if (cooldownTimer <= 0)
         {
-            Debug.Log("Shooting at player");
-            cooldownTimer = 3.0f;
+            cooldownTimer = 2.0f;
             Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hit;
             if (Physics.SphereCast(ray, 0.75f, out hit))
