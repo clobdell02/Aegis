@@ -19,15 +19,17 @@ public class PlayerControllerv2 : MonoBehaviour
   public static bool enemyHit;
   public static int lives = 3;
   private Animator animator;
+  static float keyCount;
 
     public void SetLivesText()
     {
       // sets the livesText
-      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}";
+      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}\nKey Count: {KeyPickUp.keyCount}";
     }
 
     void Start()
     {
+      lives = 3;
       livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
       animator = GetComponent<Animator>();
       SetLivesText();
@@ -61,6 +63,8 @@ public class PlayerControllerv2 : MonoBehaviour
       if (Input.GetMouseButtonDown(1) && (shockwave == true))
       {
           Debug.Log("Shockwave used!");
+          shockwave = false;
+          SetLivesText();
           // force for pushing back
           float force = 750.0f;
 
@@ -98,8 +102,7 @@ public class PlayerControllerv2 : MonoBehaviour
             shockwave = true;
             SetLivesText();
         }
-
-        if (other.gameObject.CompareTag("Health"))
+        if (other.gameObject.CompareTag("Health "))
         {
             other.gameObject.SetActive(false);
             lives += 1;
@@ -114,6 +117,11 @@ public class PlayerControllerv2 : MonoBehaviour
                 lives -= 1;
                 SetLivesText();
             }
+        }
+
+        if(other.gameObject.CompareTag("Key"))
+        {
+          SetLivesText();
         }
     }
 }

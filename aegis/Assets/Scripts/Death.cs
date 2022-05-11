@@ -26,12 +26,12 @@ public class Death : MonoBehaviour
         if (lives <= 0)
         {
             Debug.Log("Returning to title, game over!");
-            ReturnToTitle();
+            DeathScreen();
         }
     }
 
-    void ReturnToTitle()
+    void DeathScreen()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("Death");
     }
 }

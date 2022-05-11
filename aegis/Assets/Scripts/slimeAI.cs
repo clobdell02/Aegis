@@ -47,7 +47,7 @@ public class slimeAI : MonoBehaviour
                 _attack = true;
                 _chase = false;
             }
-            else*/ 
+            else*/
             if (distance > 10)
             {
                 _rest = true;
@@ -56,9 +56,8 @@ public class slimeAI : MonoBehaviour
             else
             {
                 transform.LookAt(Player);
-                transform.Translate(0, 0, speed * Time.deltaTime);
-                //slime.transform.position = transform.TransformPoint(Vector3.forward * 0.035f);
-                //slime.transform.rotation = transform.rotation;
+                slime.transform.position = transform.TransformPoint(Vector3.forward * 0.05f);
+                slime.transform.rotation = transform.rotation;
                 //slime.SetDestination(Player.position);
             }
         }
@@ -75,7 +74,7 @@ public class slimeAI : MonoBehaviour
                 _rest = true;
                 _attack = false;
             }
-            else 
+            else
             {
                 // animate attack on player
             }

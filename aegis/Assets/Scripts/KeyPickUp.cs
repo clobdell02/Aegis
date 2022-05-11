@@ -16,9 +16,9 @@ public class KeyPickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Key"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
             keyCount += 1;
         }
     }
