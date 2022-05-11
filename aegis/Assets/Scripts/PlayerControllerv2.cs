@@ -21,11 +21,14 @@ public class PlayerControllerv2 : MonoBehaviour
 
     void SetLivesText()
     {
-        livesText.text = $"Lives: {lives}";
+      // sets the livesText
+      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}";
     }
 
     void Start()
     {
+      livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
+
       SetLivesText();
     }
 
@@ -90,6 +93,7 @@ public class PlayerControllerv2 : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             shockwave = true;
+            SetLivesText();
         }
 
         if (other.gameObject.CompareTag("enemy"))
