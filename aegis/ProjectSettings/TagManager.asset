@@ -11,6 +11,7 @@ TagManager:
   - Projectile
   - Key
   - Shield
+  - 'Health '
   layers:
   - Default
   - TransparentFX

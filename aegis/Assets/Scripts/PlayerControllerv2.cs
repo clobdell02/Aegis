@@ -102,8 +102,14 @@ public class PlayerControllerv2 : MonoBehaviour
             shockwave = true;
             SetLivesText();
         }
+        if (other.gameObject.CompareTag("Health"))
+        {
+            other.gameObject.SetActive(false);
+            lives += 1;
+            SetLivesText();
+        }
 
-        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Projectile"))
+            if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Projectile"))
         {
             //Debug.Log("Hit enemy!");
             if (lives > 0)
