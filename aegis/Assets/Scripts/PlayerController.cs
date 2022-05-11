@@ -115,10 +115,6 @@ public class PlayerController : MonoBehaviour
                         // Calculate Angle Between the collision point and the player
                         Vector3 dir = selectables[i].transform.position - transform.position;
 
-                        // get the opposite (-Vector3) and normalize it
-                        //dir = -dir.normalized;
-                        //Debug.Log(dir);
-
                         // add force in the direction of dir and multiply it by force.
                         selectables[i].rb.AddForce(dir * force);
                     }
