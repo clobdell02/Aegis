@@ -20,7 +20,7 @@ public class PlayerControllerv2 : MonoBehaviour
   public static int lives = 3;
   private Animator animator;
 
-    void SetLivesText()
+    public void SetLivesText()
     {
       // sets the livesText
       livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}";
@@ -103,7 +103,7 @@ public class PlayerControllerv2 : MonoBehaviour
             SetLivesText();
         }
 
-        if (other.gameObject.CompareTag("enemy"))
+        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Projectile"))
         {
             //Debug.Log("Hit enemy!");
             if (lives > 0)

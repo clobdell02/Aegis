@@ -5,7 +5,6 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private float speed = 8.5f;
-    private float damage = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -14,7 +13,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, speed * Time.deltaTime); 
+        transform.Translate(0, 0, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +21,11 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Hit Player");
+            Destroy(this.gameObject);
+        }
+        else if (other.gameObject.CompareTag("Shield") || other.gameObject.CompareTag("CollEvnt"))
+        {
+            Debug.Log("Hit non player");
             Destroy(this.gameObject);
         }
         else
