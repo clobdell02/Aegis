@@ -5,43 +5,66 @@ using UnityEngine.AI;
 
 public class slimeAI : MonoBehaviour
 {
-    public NavMeshAgent slime;
     public Transform Player;
+    public Rigidbody rb;
+    public float speed = 2.45f;
 
-    private float speed = 2.45f;
-    private float obstacleRange = 3.0f;
+    private bool _rest;
+    private bool _chase;
+    private bool _attack;
+    private Vector3 movement;
 
     // Start is called before the first frame update
     void Start()
-    { }
+    {
+        rb = this.GetComponent<Rigidbody>();
+        _rest = true;
+        _chase = false;
+        _attack = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, 0, speed * Time.deltaTime);
-        
         var distToPlayer = Vector3.Distance(Player.position, transform.position);
-        if (distToPlayer < 10)
+        Vector3 direction = Player.position - transform.position;
+        float angle = (Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg);
+        // _rest state logic
+        if (_rest)
         {
-            huntPlayer();
-        }
-        else
-        {
-            Ray lookAhead = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            if (Physics.SphereCast(lookAhead, 0.75f, out hit))
+            if (distToPlayer < 25)
             {
-                if (hit.distance < obstacleRange)
-                {
-                    float angle = Random.Range(-110, 110);
-                    transform.Rotate(0, angle, 0);
-                }
+                _rest = false;
+                _chase = false;
+                _attack = false;
             }
         }
+        // _chase state logic
+        else if (_chase)
+        {
+            if (distToPlayer < 3)
+            {
+                _rest = false;
+                _chase = false;
+                _attack = true;
+            }
+            else
+            {
+                transform.Rotate(0, angle, 0);
+                direction.Normalize();
+                movement = direction;
+            }
+        }
+        // _attack state logic
     }
 
-    void huntPlayer()
+    private void FixedUpdate()
     {
-        slime.SetDestination(Player.position);
+        moveCharacter(movement);
+    }
+
+    void moveCharacter(Vector3 direction)
+    {
+        rb.MovePosition(transform.position + (direction * speed * Time.deltaTime));
     }
 }
