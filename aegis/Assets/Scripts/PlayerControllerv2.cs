@@ -39,6 +39,9 @@ public class PlayerControllerv2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      // Locks cursor once the screen is clicked.
+      Cursor.lockState = CursorLockMode.Locked;
+
       float horizontal = Input.GetAxisRaw("Horizontal");
       float vertical = Input.GetAxisRaw("Vertical");
 
