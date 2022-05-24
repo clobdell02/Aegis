@@ -6,6 +6,8 @@ using UnityEngine;
 public class ThirdPersonDash : MonoBehaviour
 {
     PlayerControllerv2 moveScript;
+    [SerializeField] private List<SelectableEnemies> selectables;
+
     public float dashSpeed;
     public float dashTime;
     static public bool inDash = false;
