@@ -9,9 +9,9 @@ public class ThirdPersonDash : MonoBehaviour
     public float dashSpeed;
     public float dashTime;
     static public bool inDash = false;
-    const float MAX_TIME = 1.0f;
-    static float currTime = 0.0f;
-    static bool inCooldown = false;
+    public const float MAX_TIME = 1.0f;
+    public static float currTime = 0.0f;
+    public static bool inCooldown = false;
 
     // Start is called before the first frame update
     void Start()

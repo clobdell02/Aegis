@@ -12,6 +12,7 @@ TagManager:
   - Key
   - Shield
   - 'Health '
+  - CoolBar
   layers:
   - Default
   - TransparentFX
