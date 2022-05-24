@@ -210,7 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4949955557972128}
-  - component: {fileID: 5631195777120682216}
+  - component: {fileID: 3314760369198858141}
   m_Layer: 0
   m_Name: Tree_1
   m_TagString: CollEvnt
@@ -235,7 +235,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5631195777120682216
+--- !u!65 &3314760369198858141
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
