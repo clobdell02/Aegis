@@ -60,7 +60,13 @@ public class PlayerControllerv2 : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDir.normalized * speed * Time.deltaTime);
+        Vector3 mvmt = moveDir.normalized * speed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Debug.Log("Left shift pressed!");
+            mvmt *= 1.8f;
+        }
+        controller.Move(mvmt);
       }
 
       // shockwave power up attack
