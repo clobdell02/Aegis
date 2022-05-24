@@ -9,6 +9,9 @@ public class ThirdPersonDash : MonoBehaviour
     public float dashSpeed;
     public float dashTime;
     static public bool inDash = false;
+    const float MAX_TIME = 1.0f;
+    static float currTime = 0.0f;
+    static bool inCooldown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,16 +22,26 @@ public class ThirdPersonDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !inCooldown)
         {
           StartCoroutine(Dash());
+        }
+        else if (inCooldown)
+        {
+          currTime += Time.deltaTime;
+          if (currTime >= MAX_TIME)
+          {
+            inCooldown = false;
+            currTime = 0.0f;
+          }
         }
         inDash = false;
     }
 
+
     IEnumerator Dash()
     {
-
+      inCooldown = true;
       float startTime = Time.time;
 
       while(Time.time < startTime + dashTime)
@@ -37,7 +50,6 @@ public class ThirdPersonDash : MonoBehaviour
         moveScript.controller.Move(moveScript.moveDir * dashSpeed * Time.deltaTime);
         yield return null;
       }
-
       inDash = false;
     }
 }
