@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 4377520258283221098}
   - component: {fileID: 4287763292084190563}
   - component: {fileID: 5620308387157068727}
+  - component: {fileID: 2496042720285215959}
   m_Layer: 0
   m_Name: Slime
   m_TagString: enemy
@@ -82,7 +83,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
-  m_Speed: 4
+  m_Speed: 2
   m_Acceleration: 60
   avoidancePriority: 50
   m_AngularSpeed: 65
@@ -165,6 +166,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d61ce843285d94ca39525c299e56dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &2496042720285215959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090219386143568}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1.29, z: 0}
 --- !u!1 &1159745215084782
 GameObject:
   m_ObjectHideFlags: 0

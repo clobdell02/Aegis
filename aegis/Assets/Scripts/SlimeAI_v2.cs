@@ -37,7 +37,7 @@ public class SlimeAI_v2 : MonoBehaviour
 
     void Update()
     {
-      var distToPlayer = Vector3.Distance(player.transform.position, transform.position);
+      var distToPlayer = Vector3.Distance(player.transform.position, this.transform.position);
       // Check if the enemy is within range to see the player
       if((distToPlayer <= ChaseDist) & (distToPlayer > AttackDist))
       {
