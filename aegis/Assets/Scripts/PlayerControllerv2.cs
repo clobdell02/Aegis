@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 // Movement from Brackeys: https://www.youtube.com/watch?v=4HpC--2iowE
@@ -107,6 +108,12 @@ public class PlayerControllerv2 : MonoBehaviour
               }
           }
           shockwave = false;
+      }
+
+      // Return to menu
+      if(Input.GetKey(KeyCode.Backslash))
+      {
+        SceneManager.LoadScene("Title");
       }
     }
 
