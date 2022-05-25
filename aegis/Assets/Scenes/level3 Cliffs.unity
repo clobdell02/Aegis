@@ -5004,6 +5004,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6797765941511435119, guid: 2587830fa95bd8f4e9c7552832a98115, type: 3}
   m_PrefabInstance: {fileID: 372259675}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &373303723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6487109570272129164, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
+  m_PrefabInstance: {fileID: 1734664505}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &380577961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18809,6 +18814,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3459512329525355802, guid: d25d7d96e908c7d4d8d50d2e30b328f0, type: 3}
+      propertyPath: m_ProbeAnchor
+      value: 
+      objectReference: {fileID: 2056078765}
     - target: {fileID: 3459512329525355803, guid: d25d7d96e908c7d4d8d50d2e30b328f0, type: 3}
       propertyPath: m_Name
       value: WoodLand_Diorama
@@ -20392,6 +20401,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282655014953884801, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
+      propertyPath: m_TagString
+      value: arrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150837511775880640, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 373303723}
+    - target: {fileID: 4150837511775880640, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
+      propertyPath: TargetObject
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4300022716918753208, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
       propertyPath: m_Name
       value: Cam Setup
@@ -20530,11 +20551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6487109571331622358, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008358704
+      value: -0.000000008358704
       objectReference: {fileID: 0}
     - target: {fileID: 6487109571331622358, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000020364084
+      value: 0.0000000020364084
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3881ea16ba29af0489d7239c1862a4a1, type: 3}
@@ -24696,6 +24717,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0933253977cd0454b989b8bc25bbdc83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58612c173e9f1614e8e07ea151f8f809, type: 3}
+--- !u!4 &2056078765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3174501042698023394, guid: d25d7d96e908c7d4d8d50d2e30b328f0, type: 3}
+  m_PrefabInstance: {fileID: 1634555512}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2056166524
 PrefabInstance:
   m_ObjectHideFlags: 0

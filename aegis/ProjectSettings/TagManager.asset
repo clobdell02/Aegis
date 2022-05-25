@@ -3,17 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CollEvnt
-  - Shockwave
-  - enemy
-  - Key Enemy
-  - Projectile
-  - Key
-  - Shield
-  - 'Health '
-  - CoolBar
-  - Water
+  tags: []
   layers:
   - Default
   - TransparentFX
