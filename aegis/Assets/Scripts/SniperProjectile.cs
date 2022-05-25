@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class SniperProjectile : MonoBehaviour
 {
-    private float speed = 10.0f;
+    private float speed = 18.0f;
 
     // Start is called before the first frame update
     void Start()
