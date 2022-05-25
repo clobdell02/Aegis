@@ -126,19 +126,34 @@ public class PlayerControllerv2 : MonoBehaviour
             SetLivesText();
         }
 
-        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Projectile"))
-        {
-            //Debug.Log("Hit enemy!");
-            if (lives > 0)
-            {
-                lives -= 1;
-                SetLivesText();
-            }
-        }
-
         if(other.gameObject.CompareTag("Key"))
         {
           SetLivesText();
         }
+
+        // Projectiles use trigger colliders so they have to be tracked in
+        // OnTriggerEnter
+        if(other.gameObject.CompareTag("Projectile"))
+        {
+          Debug.Log("Hit by enemy!");
+          if(lives > 0)
+          {
+            lives -= 1;
+            SetLivesText();
+          }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+      if (other.gameObject.CompareTag("enemy"))
+      {
+          Debug.Log("Hit by enemy!");
+          if (lives > 0)
+          {
+              lives -= 1;
+              SetLivesText();
+          }
+      }
     }
 }

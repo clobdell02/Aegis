@@ -294,7 +294,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121574}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.4
   m_Height: 2.1
@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4614d6eeb95394340917b6d636e298af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectables: []
   dashSpeed: 20
   dashTime: 0.25
 --- !u!114 &5774689116229689002
@@ -777,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1adbee9d1f6e334182e44983b4c4f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackStrength: 25
+  knockbackStrength: 35
 --- !u!1 &149158
 GameObject:
   m_ObjectHideFlags: 0
