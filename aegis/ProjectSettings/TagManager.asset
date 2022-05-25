@@ -13,6 +13,7 @@ TagManager:
   - Shield
   - 'Health '
   - CoolBar
+  - Water
   layers:
   - Default
   - TransparentFX
