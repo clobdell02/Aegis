@@ -20,8 +20,6 @@ public class expander_ai : MonoBehaviour
         // states the agent can be in
         _resting = true;
         _expanded = false;
-        //agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        //player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -59,7 +57,6 @@ public class expander_ai : MonoBehaviour
             {
                 _expanded = false;
                 _resting = true;
-                // reset scale to a vector of 1s
             }
         }
     }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-
-
 public class Death : MonoBehaviour
 {
     private int lives;
