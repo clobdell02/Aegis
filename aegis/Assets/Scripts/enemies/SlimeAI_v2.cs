@@ -29,9 +29,9 @@ public class SlimeAI_v2 : MonoBehaviour
       player = GameObject.FindGameObjectWithTag("Player");
 
       // Set States
-      _rest = true;
+      //_rest = true;
       _chase = false;
-      _attack = false;
+      //_attack = false;
       _wander = false;
     }
 
@@ -43,9 +43,9 @@ public class SlimeAI_v2 : MonoBehaviour
       {
         // If the enemy is close enough to see the player we want it
         // enter the chase state
-        _rest = false;
+        //_rest = false;
         _chase = true;
-        _attack = false;
+        //_attack = false;
         //Debug.Log("Enemy in Chase State");
       }
       else if(distToPlayer <= AttackDist)
@@ -53,9 +53,9 @@ public class SlimeAI_v2 : MonoBehaviour
         // If the enemy is in range to attack the player we want it
         // to enter the attack state while also remaining in the chase
         // state.
-        _rest = false;
+        //_rest = false;
         _chase = true;
-        _attack = true;
+        //_attack = true;
         //Debug.Log("Enemy in Attack State");
       }
       else if((distToPlayer > ChaseDist) & (distToPlayer <= WanderMax))
@@ -64,9 +64,9 @@ public class SlimeAI_v2 : MonoBehaviour
         // the wander max distance (meaning the player is still close enough to
         // the enemy that the enemy will wander and not rest) then we set the
         // Wander state
-        _rest = false;
+        //_rest = false;
         _chase = false;
-        _attack = false;
+        //_attack = false;
         _wander = true;
         Debug.Log("Enemy in Wander State");
       }
@@ -75,9 +75,9 @@ public class SlimeAI_v2 : MonoBehaviour
         // If the enemy is outside of the chase distance and greater than the
         // WanderMax then we want the enemy to stop moving entirely and rest
         // until the player once again enters the wander range or chase range.
-        _rest = true;
+        //_rest = true;
         _chase = false;
-        _attack = false;
+        //_attack = false;
         Debug.Log("Enemy in Rest State");
       }
 

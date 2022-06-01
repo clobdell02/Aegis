@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - arrow
+  - enemy
+  - Water
+  - Shield
+  - CollEvnt
+  - Projectile
+  - Shockwave
+  - Key Enemy
+  - Key
+  - 'Health '
+  - CoolBar
+  - Container
   layers:
   - Default
   - TransparentFX
