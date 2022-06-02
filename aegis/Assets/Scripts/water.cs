@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class water : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class water : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            lives = 0;
+            SceneManager.LoadScene("Death");
         }
         else
         {
