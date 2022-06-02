@@ -8,6 +8,8 @@ public class ThirdPersonDash : MonoBehaviour
     PlayerControllerv2 moveScript;
     [SerializeField] private List<SelectableEnemies> selectables;
 
+    public AudioSource AttackAudio;
+
     public float dashSpeed;
     public float dashTime;
     static public bool inDash = false;
@@ -26,6 +28,7 @@ public class ThirdPersonDash : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) && !inCooldown)
         {
+          AttackAudio.Play();
           StartCoroutine(Dash());
         }
         else if (inCooldown)

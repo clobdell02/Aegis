@@ -6,6 +6,7 @@ using UnityEngine;
 public class Death : MonoBehaviour
 {
     private int lives;
+    public AudioSource DamageAudio;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class Death : MonoBehaviour
         if (currentLives != lives)
         {
             Debug.Log("Lives changed!");
+            DamageAudio.Play();
             lives = currentLives;
         }
         if (lives <= 0)
