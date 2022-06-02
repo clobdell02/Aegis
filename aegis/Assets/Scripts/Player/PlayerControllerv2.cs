@@ -21,7 +21,6 @@ public class PlayerControllerv2 : MonoBehaviour
   public static int lives = 3;
   private Animator animator;
   static float keyCount;
-  public AudioSource FootstepAudio;
 
     public void SetLivesText()
     {
@@ -52,17 +51,6 @@ public class PlayerControllerv2 : MonoBehaviour
       bool isWalking = (hasHorizontalInput || hasVerticalInput) && !ThirdPersonDash.inDash;
 
       animator.SetBool("IsWalking", isWalking);
-      if(isWalking)
-      {
-        if(!FootstepAudio.isPlaying)
-        {
-          FootstepAudio.Play(); // Need to find decent footstep sfx
-        }
-      }
-      else
-      {
-        FootstepAudio.Stop();
-      }
 
       Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
