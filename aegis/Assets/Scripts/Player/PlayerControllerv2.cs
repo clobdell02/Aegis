@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,12 +13,17 @@ public class PlayerControllerv2 : MonoBehaviour
   public Transform cam;
   public float speed = 6f;
   public float smoothTurn = 0.1f;
+  public static float invincTime = 1.5f; 
+  public static float currInvincTime = 0.0f; 
+  public static float flashTime = 0.0f; 
   float turnSmoothVelocity;
   public Vector3 moveDir;
   public TextMeshProUGUI livesText;
+  public List<Renderer> renderers;
   [SerializeField] private List<SelectableEnemies> selectables;
   private bool shockwave = false;
   public static bool enemyHit;
+  public static bool invincible = false;
   public static int lives = 3;
   private Animator animator;
   static float keyCount;
@@ -25,7 +31,7 @@ public class PlayerControllerv2 : MonoBehaviour
     public void SetLivesText()
     {
       // sets the livesText
-      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}";
+      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}\n";
     }
 
     void Start()
@@ -33,6 +39,10 @@ public class PlayerControllerv2 : MonoBehaviour
       lives = 3;
       livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
       animator = GetComponent<Animator>();
+      var renders = GetComponentsInChildren<Renderer>();
+      // renders[1] is the body, renders[2] is the head
+      renderers.Add(renders[1]);
+      renderers.Add(renders[2]);
       SetLivesText();
     }
 
@@ -69,16 +79,27 @@ public class PlayerControllerv2 : MonoBehaviour
         Vector3 mvmt = moveDir.normalized * speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            //Debug.Log("Left shift pressed!");
+            Debug.Log("Left shift pressed!");
             mvmt *= 1.8f;
         }
         controller.Move(mvmt);
       }
 
+      // adds 1.5 seconds of i-frames when hit
+      if (invincible)
+      {
+          currInvincTime += Time.deltaTime;
+          if (currInvincTime >= invincTime)
+          {
+              invincible = false;
+              currInvincTime = 0;
+          }
+      }
+
       // shockwave power up attack
       if (Input.GetMouseButtonDown(1) && (shockwave == true))
       {
-          //Debug.Log("Shockwave used!");
+          Debug.Log("Shockwave used!");
           shockwave = false;
           SetLivesText();
           // force for pushing back
@@ -116,6 +137,54 @@ public class PlayerControllerv2 : MonoBehaviour
       }
     }
 
+    // function ran when you take damage
+    private void TakeDamage()
+    {
+        Debug.Log("Hit by enemy!");
+        if(lives > 0 && !invincible)
+        {
+            flashTime = 0;
+            // flash Shieldon a color to signify damage (coroutine since flashing is independent of game statee)
+            StartCoroutine(DamageFlash());
+            invincible = true;
+            lives -= 1;
+            SetLivesText();
+        }
+    }
+
+    IEnumerator DamageFlash()
+    {
+        // t is the normalized value of time based on time range, since we want it to flash red then white then red
+        float t;
+        while (flashTime < invincTime)
+        {
+            // add deltaTime to flashTime
+            flashTime += Time.deltaTime;
+            // flash red to white
+            if (flashTime < 0.5f)
+            {
+                // normalize flashTime depending on the range
+                t = flashTime * 2;
+                // lambda expression to lerp for each renderer (body and head )
+                renderers.ForEach(r => r.material.color = Color.Lerp(Color.red, Color.white, t));
+            }
+            // flash white to red
+            else if (flashTime >= 0.5 && flashTime <= 1)
+            {
+                  t = (flashTime - 0.5f) * 2; 
+                  renderers.ForEach(r => Color.Lerp(Color.white, Color.red, t));
+            }
+            // flash red to white
+            else
+            {
+                t = (flashTime - 1f) * 2; 
+                renderers.ForEach(r => r.material.color = Color.Lerp(Color.red, Color.white, t));
+            }
+            yield return null;
+        }
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Shockwave"))
@@ -134,19 +203,14 @@ public class PlayerControllerv2 : MonoBehaviour
 
         if(other.gameObject.CompareTag("Key"))
         {
-          SetLivesText();
+            SetLivesText();
         }
 
         // Projectiles use trigger colliders so they have to be tracked in
         // OnTriggerEnter
         if(other.gameObject.CompareTag("Projectile"))
         {
-          //Debug.Log("Hit by enemy!");
-          if(lives > 0)
-          {
-            lives -= 1;
-            SetLivesText();
-          }
+            TakeDamage();
         }
     }
 
@@ -154,12 +218,7 @@ public class PlayerControllerv2 : MonoBehaviour
     {
       if (other.gameObject.CompareTag("enemy"))
       {
-          //Debug.Log("Hit by enemy!");
-          if (lives > 0)
-          {
-              lives -= 1;
-              SetLivesText();
-          }
+            TakeDamage();
       }
     }
 }
