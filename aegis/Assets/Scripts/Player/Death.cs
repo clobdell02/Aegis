@@ -25,7 +25,7 @@ public class Death : MonoBehaviour
         }
         if (lives <= 0)
         {
-            Debug.Log("Returning to title, game over!");
+            //Debug.Log("Returning to title, game over!");
             DeathScreen();
         }
     }

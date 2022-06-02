@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class KeyDeath : MonoBehaviour
 {
     public NavMeshAgent agent;
-    public GameObject key;
     static bool enemyHit;
+    static int enemiesDefeated;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -17,23 +17,18 @@ public class KeyDeath : MonoBehaviour
             {
                 if (agent.gameObject.CompareTag("Key Enemy"))
                 {
-                    onDeath();
+                    KeyCreator.enemiesDefeated += 1;
                     Destroy(gameObject);
-                    Debug.Log("Key Enemy Destroyed");
+                    //Debug.Log("Key Enemy Destroyed");
+                    Debug.Log("Enemies defeated: " + KeyCreator.enemiesDefeated);
                 }
                 else
                 {
                     Destroy(gameObject);
-                    Debug.Log("Normal Enemy Destroyed");
+                    //Debug.Log("Normal Enemy Destroyed");
                 }
                 KnockbackOnCollision.enemyHit = false;
             }
         }
-    }
-
-    void onDeath()
-    {
-        Instantiate(key, transform.position, key.transform.rotation);
-        Debug.Log("Key available");
     }
 }

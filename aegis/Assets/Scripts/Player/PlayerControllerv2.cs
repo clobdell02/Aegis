@@ -25,13 +25,12 @@ public class PlayerControllerv2 : MonoBehaviour
     public void SetLivesText()
     {
       // sets the livesText
-      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}\nKey Count: {KeyPickUp.keyCount}";
+      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}";
     }
 
     void Start()
     {
       lives = 3;
-      KeyPickUp.keyCount = 0.0f;
       livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
       animator = GetComponent<Animator>();
       SetLivesText();
@@ -70,7 +69,7 @@ public class PlayerControllerv2 : MonoBehaviour
         Vector3 mvmt = moveDir.normalized * speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("Left shift pressed!");
+            //Debug.Log("Left shift pressed!");
             mvmt *= 1.8f;
         }
         controller.Move(mvmt);
@@ -79,7 +78,7 @@ public class PlayerControllerv2 : MonoBehaviour
       // shockwave power up attack
       if (Input.GetMouseButtonDown(1) && (shockwave == true))
       {
-          Debug.Log("Shockwave used!");
+          //Debug.Log("Shockwave used!");
           shockwave = false;
           SetLivesText();
           // force for pushing back
@@ -142,7 +141,7 @@ public class PlayerControllerv2 : MonoBehaviour
         // OnTriggerEnter
         if(other.gameObject.CompareTag("Projectile"))
         {
-          Debug.Log("Hit by enemy!");
+          //Debug.Log("Hit by enemy!");
           if(lives > 0)
           {
             lives -= 1;
@@ -155,7 +154,7 @@ public class PlayerControllerv2 : MonoBehaviour
     {
       if (other.gameObject.CompareTag("enemy"))
       {
-          Debug.Log("Hit by enemy!");
+          //Debug.Log("Hit by enemy!");
           if (lives > 0)
           {
               lives -= 1;

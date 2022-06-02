@@ -68,7 +68,7 @@ public class SlimeAI_v2 : MonoBehaviour
         _chase = false;
         //_attack = false;
         _wander = true;
-        Debug.Log("Enemy in Wander State");
+      //  Debug.Log("Enemy in Wander State");
       }
       else
       {
@@ -78,7 +78,7 @@ public class SlimeAI_v2 : MonoBehaviour
         //_rest = true;
         _chase = false;
         //_attack = false;
-        Debug.Log("Enemy in Rest State");
+      //  Debug.Log("Enemy in Rest State");
       }
 
       // Determine if enemy is close enough to player to chase
