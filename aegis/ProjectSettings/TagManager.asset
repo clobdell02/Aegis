@@ -22,6 +22,8 @@ TagManager:
   - sniper
   - shooter
   - expander
+  - image
+  - specific tag
   layers:
   - Default
   - TransparentFX

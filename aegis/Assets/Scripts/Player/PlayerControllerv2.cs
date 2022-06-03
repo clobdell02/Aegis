@@ -15,9 +15,9 @@ public class PlayerControllerv2 : MonoBehaviour
   public Transform cam;
   public float speed = 6f;
   public float smoothTurn = 0.1f;
-  public static float invincTime = 1.5f; 
-  public static float currInvincTime = 0.0f; 
-  public static float flashTime = 0.0f; 
+  public static float invincTime = 1.5f;
+  public static float currInvincTime = 0.0f;
+  public static float flashTime = 0.0f;
   float turnSmoothVelocity;
   private GameObject uiPrefab;
   public Vector3 moveDir;
@@ -54,7 +54,7 @@ public class PlayerControllerv2 : MonoBehaviour
 
       // add the first image (heart) to a list of hearts
       hearts.AddLast(image.GetComponent<Image>());
-      
+
       animator = GetComponent<Animator>();
       var renders = GetComponentsInChildren<Renderer>();
       // renders[1] is the body, renders[2] is the head
@@ -221,7 +221,7 @@ public class PlayerControllerv2 : MonoBehaviour
                         Debug.Log("Freezing");
                         if (selectables[i].CompareTag("enemy"))
                         {
-                            selectables[i].GetComponent<SlimeAI_v2>().enabled = false;                             
+                            selectables[i].GetComponent<SlimeAI_v2>().enabled = false;
                         }
                         if (selectables[i].CompareTag("shooter"))
                         {
@@ -321,13 +321,13 @@ public class PlayerControllerv2 : MonoBehaviour
             // flash white to red
             else if (flashTime >= 0.5 && flashTime <= 1)
             {
-                t = (flashTime - 0.5f) * 2; 
+                t = (flashTime - 0.5f) * 2;
                 renderers.ForEach(r => Color.Lerp(Color.white, Color.red, t));
             }
             // flash red to white
             else
             {
-                t = (flashTime - 1f) * 2; 
+                t = (flashTime - 1f) * 2;
                 renderers.ForEach(r => r.material.color = Color.Lerp(Color.red, Color.white, t));
             }
             yield return null;
