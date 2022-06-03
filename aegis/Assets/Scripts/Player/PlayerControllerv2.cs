@@ -40,7 +40,7 @@ public class PlayerControllerv2 : MonoBehaviour
     void Start()
     {
       lives = 3;
-      Debug.Log(powerUpText);
+      //Debug.Log(powerUpText);
       // create the hearts linked-list
       hearts = new LinkedList<Image>();
       // get the two images

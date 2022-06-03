@@ -69,28 +69,41 @@ public class ShooterAI : MonoBehaviour
                 _wander = false;
             }
             // logic to wander the map
-            transform.Translate(0, 0, speed * Time.deltaTime);
-            var dist = Vector3.Distance(Player.position, transform.position);
-            Ray lookAhead = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            if (Physics.SphereCast(lookAhead, 0.75f, out hit))
+            // case for level 3, edges!
+            UnityEngine.AI.NavMeshHit hit1;
+            if (UnityEngine.AI.NavMesh.FindClosestEdge(transform.position, out hit1, UnityEngine.AI.NavMesh.AllAreas))
             {
-                if (hit.distance < obstacleRange)
+                if (hit1.distance < 1.5f)
                 {
-                    float angle = Random.Range(-90, 90);
-                    transform.Rotate(0, angle, 0);
+                    transform.Rotate(0, 180, 0);
+                    timer = changeDirectionTimer;
                 }
-                timer = changeDirectionTimer;
             }
             else
             {
-                timer -= Time.deltaTime;
-                if (timer > 0)
-                    return;
+                transform.Translate(0, 0, speed * Time.deltaTime);
+                var dist = Vector3.Distance(Player.position, transform.position);
+                Ray lookAhead = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
+                if (Physics.SphereCast(lookAhead, 0.75f, out hit))
+                {
+                    if (hit.distance < obstacleRange)
+                    {
+                        float angle = Random.Range(-90, 90);
+                        transform.Rotate(0, angle, 0);
+                    }
+                    timer = changeDirectionTimer;
+                }
                 else
                 {
-                    float angle = Random.Range(-110, 110);
-                    transform.Rotate(0, angle, 0);
+                    timer -= Time.deltaTime;
+                    if (timer > 0)
+                        return;
+                    else
+                    {
+                        float angle = Random.Range(-110, 110);
+                        transform.Rotate(0, angle, 0);
+                    }
                 }
             }
         }
