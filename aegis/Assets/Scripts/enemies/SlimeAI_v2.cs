@@ -82,7 +82,7 @@ public class SlimeAI_v2 : MonoBehaviour
             {
                 // logic to wander the map
                 // case for level 3, edges!
-                UnityEngine.AI.NavMeshHit hit1;
+                /*UnityEngine.AI.NavMeshHit hit1;
                 if (UnityEngine.AI.NavMesh.FindClosestEdge(transform.position, out hit1, UnityEngine.AI.NavMesh.AllAreas))
                 {
                     if (hit1.distance < 1.5f)
@@ -92,32 +92,32 @@ public class SlimeAI_v2 : MonoBehaviour
                     }
                 }
                 else
+                {*/
+                transform.Translate(0, 0, agent.speed * Time.deltaTime);
+                var dist = Vector3.Distance(player.transform.position, transform.position);
+                Ray lookAhead = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
+                if (Physics.SphereCast(lookAhead, 0.75f, out hit))
                 {
-                    transform.Translate(0, 0, agent.speed * Time.deltaTime);
-                    var dist = Vector3.Distance(player.transform.position, transform.position);
-                    Ray lookAhead = new Ray(transform.position, transform.forward);
-                    RaycastHit hit;
-                    if (Physics.SphereCast(lookAhead, 0.75f, out hit))
+                    if (hit.distance < obstacleRange)
                     {
-                        if (hit.distance < obstacleRange)
-                        {
-                            float angle = Random.Range(-90, 90);
-                            transform.Rotate(0, angle, 0);
-                        }
-                        timer = changeDirectionTimer;
+                        float angle = Random.Range(-90, 90);
+                        transform.Rotate(0, angle, 0);
                     }
+                    timer = changeDirectionTimer;
+                }
+                else
+                {
+                    timer -= Time.deltaTime;
+                    if (timer > 0)
+                        return;
                     else
                     {
-                        timer -= Time.deltaTime;
-                        if (timer > 0)
-                            return;
-                        else
-                        {
-                            float angle = Random.Range(-110, 110);
-                            transform.Rotate(0, angle, 0);
-                        }
+                        float angle = Random.Range(-110, 110);
+                        transform.Rotate(0, angle, 0);
                     }
                 }
+                //}
             }
         }
 
