@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: -707730797291891620}
   m_Layer: 0
   m_Name: Sniper
-  m_TagString: enemy
+  m_TagString: sniper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -841,7 +841,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -910,7 +910,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  LookPercentage: 0
 --- !u!114 &-707730797291891620
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class SlimeAI_v2 : MonoBehaviour
       player = GameObject.FindGameObjectWithTag("Player");
     
       // Set Animator
-      Animator _animator = GetComponent<Animator>();
+      _animator = GetComponent<Animator>();
 
       // Set States
       //_rest = true;

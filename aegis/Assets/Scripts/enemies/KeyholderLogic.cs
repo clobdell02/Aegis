@@ -7,7 +7,7 @@ public class KeyholderLogic : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform Player;
-    private float speed = 3.5f;
+    private float speed = 2.5f;
     private float obstacleRange = 3.0f;
     private float changeDirectionTimer = 1.2f;
     private float timer = 0.0f;

@@ -852,7 +852,7 @@ GameObject:
   - component: {fileID: 6078663617013390829}
   m_Layer: 0
   m_Name: TurtleShell
-  m_TagString: enemy
+  m_TagString: shooter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -884,7 +884,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 1.5
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 30
@@ -953,7 +953,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  LookPercentage: 0
 --- !u!114 &6078663617013390829
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -21,7 +21,10 @@ public class PlayerControllerv2 : MonoBehaviour
   public TextMeshProUGUI livesText;
   public List<Renderer> renderers;
   [SerializeField] private List<SelectableEnemies> selectables;
+  [SerializeField] private List<SelectableEnemies> frozen_enemies;
+  private float frozen_timer;
   private bool shockwave = false;
+  private bool freeze = false;
   public static bool enemyHit;
   public static bool invincible = false;
   public static int lives = 3;
@@ -31,7 +34,7 @@ public class PlayerControllerv2 : MonoBehaviour
     public void SetLivesText()
     {
       // sets the livesText
-      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : "None")}\n";
+      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : freeze ? "Freeze" : "None")}\n";
     }
 
     void Start()
@@ -96,42 +99,126 @@ public class PlayerControllerv2 : MonoBehaviour
           }
       }
 
-      // shockwave power up attack
-      if (Input.GetMouseButtonDown(1) && (shockwave == true))
-      {
-          Debug.Log("Shockwave used!");
-          shockwave = false;
-          SetLivesText();
-          // force for pushing back
-          float force = 750.0f;
+        // shockwave power up attack
+        if (Input.GetMouseButtonDown(1) && (shockwave == true))
+        {
+            Debug.Log("Shockwave used!");
+            shockwave = false;
+            SetLivesText();
+            // force for pushing back
+            float force = 750.0f;
 
-          // detect enemies in a given range of the player
-          float range = 5.0f;
-          for (int i = 0; i < selectables.Count; i++)
-          {
-              // check for null
-              if (selectables[i] == null)
-              {
-                  selectables.Remove(selectables[i]);
-              }
-              else
-              {
-                  var distance = Vector3.Distance(selectables[i].transform.position, transform.position);
-                  if (distance <= range)
-                  {
-                      // Calculate Angle Between the collision point and the player
-                      Vector3 dir = selectables[i].transform.position - transform.position;
+            // detect enemies in a given range of the player
+            float range = 5.0f;
+            for (int i = 0; i < selectables.Count; i++)
+            {
+                // check for null
+                if (selectables[i] == null)
+                {
+                    selectables.Remove(selectables[i]);
+                }
+                else
+                {
+                    var distance = Vector3.Distance(selectables[i].transform.position, transform.position);
+                    if (distance <= range)
+                    {
+                        // Calculate Angle Between the collision point and the player
+                        Vector3 dir = selectables[i].transform.position - transform.position;
 
-                      // add force in the direction of dir and multiply it by force.
-                      selectables[i].rb.AddForce(dir * force);
-                  }
-              }
-          }
-          shockwave = false;
-      }
+                        // add force in the direction of dir and multiply it by force.
+                        selectables[i].rb.AddForce(dir * force);
+                    }
+                }
+            }
+            shockwave = false;
+        }
+        else if (Input.GetMouseButtonDown(1) && (freeze == true))
+        {
+            Debug.Log("Freeze used!");
+            frozen_timer = 3.0f;
+            freeze = false;
+            SetLivesText();
+            // get all enemies within range
+            float range = 5.0f;
+            for (int i = 0; i < selectables.Count; i++)
+            {
+                // check for null
+                if (selectables[i] == null)
+                {
+                    selectables.Remove(selectables[i]);
+                }
+                else
+                {
+                    var distance = Vector3.Distance(selectables[i].transform.position, transform.position);
+                    if (distance <= range)
+                    {
+                        // add enemy to the frozen list
+                        frozen_enemies.Add(selectables[i]);
+                        // freeze enemy
+                        Debug.Log("Freezing");
+                        if (selectables[i].CompareTag("enemy"))
+                        {
+                            selectables[i].GetComponent<SlimeAI_v2>().enabled = false;                             
+                        }
+                        if (selectables[i].CompareTag("shooter"))
+                        {
+                            selectables[i].GetComponent<ShooterAI>().enabled = false;
+                        }
+                        if (selectables[i].CompareTag("sniper"))
+                        {
+                            selectables[i].GetComponent<SniperAi>().enabled = false;
+                        }
+                        if (selectables[i].CompareTag("expander"))
+                        {
+                            selectables[i].GetComponent<expander_ai>().enabled = false;
+                        }
+                        if (selectables[i].CompareTag("Key Enemy"))
+                        {
+                            selectables[i].GetComponent<KeyholderLogic>().enabled = false;
+                        }
+                    }
+                }
+            }
+        }
+        // wait 3 seconds
+        if ((frozen_enemies.Count >= 1) && (frozen_timer <= 0.0f))
+        {
+            Debug.Log("Unfreezing");
+            // unfreeze enemies
+            for (int i = 0; i < frozen_enemies.Count; i++)
+            {
+                if (frozen_enemies[i].CompareTag("enemy"))
+                {
+                    frozen_enemies[i].GetComponent<SlimeAI_v2>().enabled = true;
+                }
+                if (frozen_enemies[i].CompareTag("shooter"))
+                {
+                    frozen_enemies[i].GetComponent<ShooterAI>().enabled = true;
+                        }
+                if (frozen_enemies[i].CompareTag("sniper"))
+                {
+                    frozen_enemies[i].GetComponent<SniperAi>().enabled = true;
+                        }
+                if (frozen_enemies[i].CompareTag("expander"))
+                {
+                    frozen_enemies[i].GetComponent<expander_ai>().enabled = true;
+                        }
+                if (frozen_enemies[i].CompareTag("Key Enemy"))
+                {
+                    frozen_enemies[i].GetComponent<KeyholderLogic>().enabled = true;
+                }
+                // remove from frozen list
+                frozen_enemies.Remove(frozen_enemies[i]);
+            }
+        }
+        else if(frozen_timer >= 0.0)
+        {
+            //Debug.Log("Waiting to unfreeze");
+            frozen_timer -= Time.deltaTime;
+        }
 
       // Return to menu
-      if(Input.GetKey(KeyCode.Backslash))
+      if (Input.GetKey(KeyCode.Backslash))
       {
         SceneManager.LoadScene("Title");
       }
@@ -191,6 +278,13 @@ public class PlayerControllerv2 : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             shockwave = true;
+            SetLivesText();
+        }
+
+        if(other.gameObject.CompareTag("Freeze"))
+        {
+            other.gameObject.SetActive(false);
+            freeze = true;
             SetLivesText();
         }
 

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SniperProjectile : MonoBehaviour
 {
-    private float speed = 18.0f;
+    private float speed = 14.0f;
+    private float travel_time = 3.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -14,23 +15,19 @@ public class SniperProjectile : MonoBehaviour
     void Update()
     {
         transform.Translate(0, 0, speed * Time.deltaTime);
+        if (travel_time <= 0.0f)
+        {
+            Destroy(this.gameObject);
+            //travel_time = 2.5f;
+        }
+        else
+        {
+            travel_time -= Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Hit Player");
-            Destroy(this.gameObject);
-        }
-        else if (other.gameObject.CompareTag("Shield") || other.gameObject.CompareTag("CollEvnt"))
-        {
-            Debug.Log("Hit non player");
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject, 2.5f);
-        }
+        Destroy(this.gameObject);
     }
 }

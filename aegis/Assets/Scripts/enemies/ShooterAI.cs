@@ -13,7 +13,7 @@ public class ShooterAI : MonoBehaviour
     private float cooldownTimer;
     private float restTimer = 5.0f;
 
-    private float speed = 2.8f;
+    private float speed = 1.5f;
     private float obstacleRange = 3.0f;
     private float changeDirectionTimer = 1.2f;
     private float timer = 0.0f;

@@ -18,6 +18,10 @@ TagManager:
   - Container
   - MenuMusic
   - Instruction
+  - Freeze
+  - sniper
+  - shooter
+  - expander
   layers:
   - Default
   - TransparentFX

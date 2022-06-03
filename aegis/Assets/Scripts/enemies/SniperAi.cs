@@ -10,8 +10,6 @@ public class SniperAi : MonoBehaviour
 
     [SerializeField] private GameObject ProjectilePrefab;
     private GameObject _Projectile;
-    private GameObject _Projectile1;
-    private GameObject _Projectile2;
     private float cooldownTimer;
 
     // Start is called before the first frame update
@@ -24,12 +22,12 @@ public class SniperAi : MonoBehaviour
         var distance = Vector3.Distance(Player.position, transform.position);
 
         // check for firing range
-        if (distance < 45.0f)
+        if (distance < 48.0f)
         {
             transform.LookAt(Player);
             if (cooldownTimer <= 0)
             {
-                cooldownTimer = 2.5f;
+                cooldownTimer = 1.8f;
                 ShootAtPlayer();
             }
             cooldownTimer -= Time.deltaTime;
@@ -43,16 +41,8 @@ public class SniperAi : MonoBehaviour
         if (Physics.SphereCast(ray, 0.75f, out hit))
         {
             _Projectile = Instantiate(ProjectilePrefab) as GameObject;
-            _Projectile.transform.position = transform.TransformPoint(Vector3.forward * 1.9f);
+            _Projectile.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
             _Projectile.transform.rotation = transform.rotation;
-
-            _Projectile1 = Instantiate(ProjectilePrefab) as GameObject;
-            _Projectile1.transform.position = transform.TransformPoint(Vector3.forward * 1.2f);
-            _Projectile1.transform.rotation = transform.rotation;
-
-            _Projectile2 = Instantiate(ProjectilePrefab) as GameObject;
-            _Projectile2.transform.position = transform.TransformPoint(Vector3.forward * 0.5f);
-            _Projectile2.transform.rotation = transform.rotation;
         }
     }
 }

@@ -11,7 +11,8 @@ public class HitByPlayer : MonoBehaviour
     {
         if(KnockbackOnCollision.enemyHit)
         {
-            if(collision.collider.CompareTag("CollEvnt") || collision.collider.CompareTag("enemy"))
+            if(collision.collider.CompareTag("CollEvnt") || collision.collider.CompareTag("enemy") || collision.collider.CompareTag("sniper")
+                || collision.collider.CompareTag("shooter") || collision.collider.CompareTag("expander") || collision.collider.CompareTag("Key Enemy"))
             {
                 Destroy(gameObject);
                 Debug.Log("Normal Enemy Destroyed");
