@@ -144,7 +144,7 @@ public class PlayerControllerv2 : MonoBehaviour
         if(lives > 0 && !invincible)
         {
             flashTime = 0;
-            // flash Shieldon a color to signify damage (coroutine since flashing is independent of game statee)
+            // flash Shieldon a color to signify damage (coroutine since flashing is independent of game state)
             StartCoroutine(DamageFlash());
             invincible = true;
             lives -= 1;
@@ -158,21 +158,21 @@ public class PlayerControllerv2 : MonoBehaviour
         float t;
         while (flashTime < invincTime)
         {
-            // add deltaTime to flashTime
             flashTime += Time.deltaTime;
             // flash red to white
             if (flashTime < 0.5f)
             {
                 // normalize flashTime depending on the range
                 t = flashTime * 2;
-                // lambda expression to lerp for each renderer (body and head )
+                // lambda expression to lerp for each renderer (body and head)
+                // same thing for the other conditional statements
                 renderers.ForEach(r => r.material.color = Color.Lerp(Color.red, Color.white, t));
             }
             // flash white to red
             else if (flashTime >= 0.5 && flashTime <= 1)
             {
-                  t = (flashTime - 0.5f) * 2; 
-                  renderers.ForEach(r => Color.Lerp(Color.white, Color.red, t));
+                t = (flashTime - 0.5f) * 2; 
+                renderers.ForEach(r => Color.Lerp(Color.white, Color.red, t));
             }
             // flash red to white
             else

@@ -21,12 +21,18 @@ public class SlimeAI_v2 : MonoBehaviour
   private bool _chase;
   private bool _attack;
   private bool _wander;
+  
+  // Animator
+  private Animator _animator;
 
   public Transform target;
     void Start()
     {
       agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
       player = GameObject.FindGameObjectWithTag("Player");
+    
+      // Set Animator
+      Animator _animator = GetComponent<Animator>();
 
       // Set States
       //_rest = true;
@@ -80,6 +86,10 @@ public class SlimeAI_v2 : MonoBehaviour
         //_attack = false;
       //  Debug.Log("Enemy in Rest State");
       }
+
+      // Set animator states
+      _animator.SetBool("_chase", _chase);
+      _animator.SetBool("_wander", _wander);
 
       // Determine if enemy is close enough to player to chase
       if(_chase)
