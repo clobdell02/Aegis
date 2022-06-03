@@ -14,15 +14,12 @@ public class Victory : MonoBehaviour
       switch(scene.name)
       {
         case "level1 Desert":
-          SceneManager.LoadScene("level2 Forest");
+          SceneManager.LoadScene("Level1Transition");
           break;
-        case "level2 Forest":
-          SceneManager.LoadScene("level3 Cliffs");
+        case "level2 forest":
+          SceneManager.LoadScene("Level2Transition");
           break;
         case "level3 Cliffs":
-          SceneManager.LoadScene("Victory");
-          break;
-        case "ColeTest":
           SceneManager.LoadScene("Victory");
           break;
         default:
