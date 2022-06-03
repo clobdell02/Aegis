@@ -7,6 +7,7 @@ public class ShooterAI : MonoBehaviour
 {
     public NavMeshAgent turtle;
     public Transform Player;
+    public AudioSource shootAudio;
 
     [SerializeField] private GameObject ProjectilePrefab;
     private GameObject _Projectile;
@@ -119,6 +120,7 @@ public class ShooterAI : MonoBehaviour
             RaycastHit hit;
             if (Physics.SphereCast(ray, 0.75f, out hit))
             {
+                shootAudio.Play();
                 _Projectile = Instantiate(ProjectilePrefab) as GameObject;
                 _Projectile.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
                 _Projectile.transform.rotation = transform.rotation;
