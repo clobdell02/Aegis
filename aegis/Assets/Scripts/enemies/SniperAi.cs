@@ -28,7 +28,7 @@ public class SniperAi : MonoBehaviour
         {
             if (cooldownTimer <= 0)
             {
-                cooldownTimer = 1.6f;
+                cooldownTimer = 2.0f;
                 ShootAtPlayer();
             }
             cooldownTimer -= Time.deltaTime;
@@ -42,8 +42,8 @@ public class SniperAi : MonoBehaviour
         if (Physics.SphereCast(ray, 0.75f, out hit))
         {
             // create the starting position vector
-            Vector3 start_pos = transform.TransformPoint(Vector3.forward * 1.0f);
-            start_pos.y = start_pos.y * 1.2f;
+            Vector3 start_pos = transform.TransformPoint(Vector3.forward * 1.5f);
+            start_pos.y = start_pos.y + 1.2f;
             // play shooting audio
             shootAudio.Play();
             // instantiate the projectile 
