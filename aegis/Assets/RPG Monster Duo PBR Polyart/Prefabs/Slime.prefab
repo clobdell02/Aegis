@@ -43,12 +43,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4885079432260988}
   - component: {fileID: 9183342489830280427}
-  - component: {fileID: 2987195699975683453}
+  - component: {fileID: 2475862184553739896}
   - component: {fileID: 1125458323242626613}
   - component: {fileID: 4377520258283221098}
   - component: {fileID: 4287763292084190563}
   - component: {fileID: 5620308387157068727}
-  - component: {fileID: 2496042720285215959}
   - component: {fileID: 8832828769718540403}
   - component: {fileID: 2940021232220198210}
   m_Layer: 0
@@ -97,8 +96,8 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!135 &2987195699975683453
-SphereCollider:
+--- !u!136 &2475862184553739896
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -107,9 +106,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &1125458323242626613
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -166,19 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathAudio: {fileID: 2940021232220198210}
---- !u!65 &2496042720285215959
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090219386143568}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 1.29, z: 0}
 --- !u!95 &8832828769718540403
 Animator:
   serializedVersion: 4

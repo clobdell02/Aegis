@@ -18,7 +18,6 @@ public class Projectile : MonoBehaviour
         if (travel_time <= 0.0f)
         {
             Destroy(this.gameObject);
-            //travel_time = 2.5f;
         }
         else
         {

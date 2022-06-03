@@ -120,9 +120,16 @@ public class ShooterAI : MonoBehaviour
             RaycastHit hit;
             if (Physics.SphereCast(ray, 0.75f, out hit))
             {
+                // create the starting position vector
+                Vector3 start_pos = transform.transform.TransformPoint(Vector3.forward * 1.0f);
+                start_pos.y = start_pos.y * 3.0f;
+                // play shooting audio
                 shootAudio.Play();
+                // instantiate the projectile 
                 _Projectile = Instantiate(ProjectilePrefab) as GameObject;
-                _Projectile.transform.position = transform.TransformPoint(Vector3.forward * 1.5f);
+                // Set the projectiles starting point
+                _Projectile.transform.position = start_pos;
+                // Set the projectiles rotation
                 _Projectile.transform.rotation = transform.rotation;
             }
         }

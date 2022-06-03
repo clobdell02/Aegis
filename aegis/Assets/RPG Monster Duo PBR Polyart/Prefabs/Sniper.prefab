@@ -802,7 +802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4906828391645816}
   - component: {fileID: 7441809270947888103}
-  - component: {fileID: 4624876753154269968}
+  - component: {fileID: 6260542156430280957}
   - component: {fileID: 3466927771586643832}
   - component: {fileID: 1678871933286112910}
   - component: {fileID: 7551188992644887505}
@@ -855,8 +855,8 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &4624876753154269968
-SphereCollider:
+--- !u!136 &6260542156430280957
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -865,9 +865,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &3466927771586643832
 Rigidbody:
   m_ObjectHideFlags: 0
