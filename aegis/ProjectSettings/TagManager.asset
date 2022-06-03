@@ -17,6 +17,7 @@ TagManager:
   - CoolBar
   - Container
   - MenuMusic
+  - Instruction
   layers:
   - Default
   - TransparentFX

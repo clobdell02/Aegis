@@ -9,28 +9,31 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: cbd38922831f8fd4ab5e7cc52af10b7c
   - enabled: 1
-    path: Assets/Scenes/Control Screen.unity
-    guid: 89f7fc3700719e14ba457477ddc45246
-  - enabled: 1
-    path: Assets/Scenes/level2 forest.unity
-    guid: 3968a21f23951b942811bf09fca9e1a0
-  - enabled: 1
     path: Assets/Scenes/HowTo.unity
     guid: 4e76e31ca54b41346ac11188ded3cff5
   - enabled: 1
-    path: Assets/Scenes/level1 Desert.unity
-    guid: e1b793c40df980747b159fd6e9176269
-  - enabled: 1
-    path: Assets/Scenes/Death.unity
-    guid: a0459d5edd76bb64daf10ca5bf0b8d45
-  - enabled: 1
-    path: Assets/Scenes/Victory.unity
-    guid: 7e05fdc3f338de247909ae7119770826
+    path: Assets/Scenes/Control Screen.unity
+    guid: 89f7fc3700719e14ba457477ddc45246
   - enabled: 1
     path: Assets/Scenes/Level Select.unity
     guid: ac72e740d249a40469ef42eb96bc26e9
   - enabled: 1
+    path: Assets/Scenes/level1 Desert.unity
+    guid: e1b793c40df980747b159fd6e9176269
+  - enabled: 1
+    path: Assets/Scenes/level2 forest.unity
+    guid: 3968a21f23951b942811bf09fca9e1a0
+  - enabled: 1
     path: Assets/Scenes/level3 Cliffs.unity
     guid: 5af012a8b7991a84fb99a854db8dfc21
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 7e05fdc3f338de247909ae7119770826
+  - enabled: 1
+    path: Assets/Scenes/Death.unity
+    guid: a0459d5edd76bb64daf10ca5bf0b8d45
+  - enabled: 1
+    path: Assets/Scenes/TutorialSandbox.unity
+    guid: 867b768467497f24591005d22c39687f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8d9419b8efcd5444a83e8f89370189bd, type: 2}
