@@ -371,9 +371,14 @@ public class PlayerControllerv2 : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-      if (other.gameObject.CompareTag("enemy"))
+      if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("sniper") || other.gameObject.CompareTag("shooter") || other.gameObject.CompareTag("expander"))
       {
             TakeDamage();
+            // get the angle between the enemy and player
+            Vector3 ang = (other.transform.position - transform.position);
+            ang.y = 0;
+            // apply a small force back on the enemy
+            other.gameObject.GetComponent<Rigidbody>().AddForce(ang.normalized * 2.5f, ForceMode.Impulse);
       }
     }
 }

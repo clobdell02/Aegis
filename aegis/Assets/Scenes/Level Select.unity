@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3c461df6ccd284bafba37e4722533b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: level1 Desert
+  LevelName: Title
 --- !u!114 &281686436
 MonoBehaviour:
   m_ObjectHideFlags: 0
