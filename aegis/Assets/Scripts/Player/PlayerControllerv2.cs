@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 // Movement from Brackeys: https://www.youtube.com/watch?v=4HpC--2iowE
@@ -17,36 +19,97 @@ public class PlayerControllerv2 : MonoBehaviour
   public static float currInvincTime = 0.0f; 
   public static float flashTime = 0.0f; 
   float turnSmoothVelocity;
+  private GameObject uiPrefab;
   public Vector3 moveDir;
-  public TextMeshProUGUI livesText;
+  public LinkedList<Image> hearts;
+  public GameObject powerup;
   public List<Renderer> renderers;
   [SerializeField] private List<SelectableEnemies> selectables;
   [SerializeField] private List<SelectableEnemies> frozen_enemies;
   private float frozen_timer;
   private bool shockwave = false;
   private bool freeze = false;
+  public TextMeshProUGUI powerUpText;
+  private float xDisplacement = 35;
   public static bool enemyHit;
   public static bool invincible = false;
-  public static int lives = 3;
+  public static int lives;
   private Animator animator;
   static float keyCount;
-
-    public void SetLivesText()
-    {
-      // sets the livesText
-      livesText.text = $"Lives: {lives}\nPower Up: {(shockwave ? "Shockwave" : freeze ? "Freeze" : "None")}\n";
-    }
 
     void Start()
     {
       lives = 3;
-      livesText = GameObject.Find("UIPrefab").GetComponent<TextMeshProUGUI>();
+      Debug.Log(powerUpText);
+      // create the hearts linked-list
+      hearts = new LinkedList<Image>();
+      // get the two images
+      var image = GameObject.FindGameObjectWithTag("image");
+
+      // get the UIPrefab gameobject
+      uiPrefab = GameObject.Find("UIPrefab");
+
+      // get the powerUpText gameobject
+      powerUpText = uiPrefab.transform.Find("Canvas").transform.Find("PowerUpText").GetComponent<TextMeshProUGUI>();
+
+      // add the first image (heart) to a list of hearts
+      hearts.AddLast(image.GetComponent<Image>());
+      
       animator = GetComponent<Animator>();
       var renders = GetComponentsInChildren<Renderer>();
       // renders[1] is the body, renders[2] is the head
       renderers.Add(renders[1]);
       renderers.Add(renders[2]);
-      SetLivesText();
+
+      SetPowerUpText();
+
+      // instantiate and draw 2 more hearts to make 3
+      InitializeLives();
+    }
+
+    public void SetPowerUpText()
+    {
+      // sets the powerUpText
+      powerUpText.text = $"<u>Power Up</u>\n{(shockwave ? "Shockwave" : freeze ? "Freeze" : "None")}\n";
+    }
+
+    void InitializeLives()
+    {
+      for (int i = 0; i < lives - 1; ++i)
+      {
+        // instantiate (copy) the first heart and make it a child of canvas (the first child of uiPrefab)
+        Image newHeart = Image.Instantiate(hearts.First(), uiPrefab.transform.GetChild(0));
+        // add the new image to the hearts linked-list
+        hearts.AddLast(newHeart);
+        // change the new heart's position and set it to be active
+        hearts.Last().GetComponent<RectTransform>().anchoredPosition += new Vector2(xDisplacement, 0);
+        hearts.Last().gameObject.SetActive(true);
+        // the next heart will be 35 pixels to the right
+        xDisplacement += 35;
+      }
+    }
+
+    void AddLives()
+    {
+      // instantiate (copy) the first heart and make it a child of canvas (the first child of uiPrefab)
+      Image newHeart = Image.Instantiate(hearts.First(), uiPrefab.transform.GetChild(0));
+      // add the new image to the hearts linked-list
+      hearts.AddLast(newHeart);
+      // change the new heart's position and set it to be active
+      hearts.Last().GetComponent<RectTransform>().anchoredPosition += new Vector2(xDisplacement, 0);
+      hearts.Last().gameObject.SetActive(true);
+      // the next heart will be 35 pixels to the right, add 1 life
+      xDisplacement += 35;
+      lives += 1;
+    }
+
+    void RemoveLives()
+    {
+      // destroy the last heart object that was create and remove it from the hearts list
+      Destroy(hearts.Last());
+      hearts.RemoveLast();
+      // put the displacement back to where it was before, remove 1 life
+      xDisplacement -= 35;
     }
 
     // Update is called once per frame
@@ -104,7 +167,7 @@ public class PlayerControllerv2 : MonoBehaviour
         {
             Debug.Log("Shockwave used!");
             shockwave = false;
-            SetLivesText();
+            SetPowerUpText();
             // force for pushing back
             float force = 750.0f;
 
@@ -137,7 +200,7 @@ public class PlayerControllerv2 : MonoBehaviour
             Debug.Log("Freeze used!");
             frozen_timer = 3.0f;
             freeze = false;
-            SetLivesText();
+            SetPowerUpText();
             // get all enemies within range
             float range = 5.0f;
             for (int i = 0; i < selectables.Count; i++)
@@ -230,12 +293,12 @@ public class PlayerControllerv2 : MonoBehaviour
         Debug.Log("Hit by enemy!");
         if(lives > 0 && !invincible)
         {
+            lives -= 1;
             flashTime = 0;
             // flash Shieldon a color to signify damage (coroutine since flashing is independent of game state)
             StartCoroutine(DamageFlash());
             invincible = true;
-            lives -= 1;
-            SetLivesText();
+            RemoveLives();
         }
     }
 
@@ -278,26 +341,24 @@ public class PlayerControllerv2 : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             shockwave = true;
-            SetLivesText();
+            SetPowerUpText();
         }
 
         if(other.gameObject.CompareTag("Freeze"))
         {
             other.gameObject.SetActive(false);
             freeze = true;
-            SetLivesText();
+            SetPowerUpText();
         }
 
         if (other.gameObject.CompareTag("Health "))
         {
             other.gameObject.SetActive(false);
-            lives += 1;
-            SetLivesText();
+            AddLives();
         }
 
         if(other.gameObject.CompareTag("Key"))
         {
-            SetLivesText();
         }
 
         // Projectiles use trigger colliders so they have to be tracked in
