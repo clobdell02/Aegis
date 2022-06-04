@@ -337,10 +337,11 @@ MonoBehaviour:
   speed: 6
   smoothTurn: 0.1
   moveDir: {x: 0, y: 0, z: 0}
-  livesText: {fileID: 0}
+  powerup: {fileID: 0}
   renderers: []
   selectables: []
   frozen_enemies: []
+  powerUpText: {fileID: 0}
 --- !u!114 &6036049365168885223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,8 +965,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: -0.185, z: 1.3}
-  m_Center: {x: 0.23, y: -0.12, z: -0.08845}
+  m_Size: {x: 1, y: 0.185, z: 1.5}
+  m_Center: {x: 0.23, y: -0.1, z: 0}
 --- !u!114 &1767413643473892685
 MonoBehaviour:
   m_ObjectHideFlags: 0

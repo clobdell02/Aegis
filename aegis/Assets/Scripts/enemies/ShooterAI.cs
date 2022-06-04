@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class ShooterAI : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class ShooterAI : MonoBehaviour
 
     [SerializeField] private GameObject ProjectilePrefab;
     private GameObject _Projectile;
+    Scene currScene;
+    private string sceneName;
+
     private float cooldownTimer;
     private float restTimer = 5.0f;
 
@@ -29,6 +33,8 @@ public class ShooterAI : MonoBehaviour
         _rest = true;
         _wander = false;
         _engaged = false;
+        currScene = SceneManager.GetActiveScene();
+        sceneName = currScene.name;
     }
 
     // Update is called once per frame
@@ -62,50 +68,30 @@ public class ShooterAI : MonoBehaviour
                 _engaged = true;
                 _wander = false;
             }
-            if (distance >= 30)
+            else if (distance >= 30)
             {
                 _rest = true;
                 _engaged = false;
                 _wander = false;
             }
-            // logic to wander the map
-            // case for level 3, edges!
-            /*UnityEngine.AI.NavMeshHit hit1;
-            if (UnityEngine.AI.NavMesh.FindClosestEdge(transform.position, out hit1, UnityEngine.AI.NavMesh.AllAreas))
+            // case for level 3, handeling edges
+            else if (sceneName == "level3 Cliffs")
             {
-                if (hit1.distance < 1.5f)
+                UnityEngine.AI.NavMeshHit hit1;
+                if (UnityEngine.AI.NavMesh.FindClosestEdge(transform.position, out hit1, UnityEngine.AI.NavMesh.AllAreas))
                 {
-                    transform.Rotate(0, 180, 0);
-                    timer = changeDirectionTimer;
+                    if (hit1.distance < 0.5f)
+                    {
+                        float angle = Random.Range(155, 200);
+                        transform.Rotate(0, angle, 0);
+                        timer = changeDirectionTimer;
+                    }
                 }
             }
             else
-            {*/
-            transform.Translate(0, 0, speed * Time.deltaTime);
-            var dist = Vector3.Distance(Player.position, transform.position);
-            Ray lookAhead = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
-            if (Physics.SphereCast(lookAhead, 0.75f, out hit))
             {
-                if (hit.distance < obstacleRange)
-                {
-                    float angle = Random.Range(-90, 90);
-                    transform.Rotate(0, angle, 0);
-                }
-                timer = changeDirectionTimer;
+                wander();
             }
-            else
-            {
-                timer -= Time.deltaTime;
-                if (timer > 0)
-                    return;
-                else
-                {
-                    float angle = Random.Range(-110, 110);
-                    transform.Rotate(0, angle, 0);
-                }
-            }
-            //}
         }
         // engage state logic
         if (_engaged)
@@ -147,4 +133,32 @@ public class ShooterAI : MonoBehaviour
             }
         }
     }
+
+        void wander()
+        {
+            transform.Translate(0, 0, speed * Time.deltaTime);
+            var dist = Vector3.Distance(Player.position, transform.position);
+            Ray lookAhead = new Ray(transform.position, transform.forward);
+            RaycastHit hit;
+            if (Physics.SphereCast(lookAhead, 0.75f, out hit))
+            {
+                if (hit.distance < obstacleRange)
+                {
+                    float angle = Random.Range(-90, 90);
+                    transform.Rotate(0, angle, 0);
+                }
+                timer = changeDirectionTimer;
+            }
+            else
+            {
+                timer -= Time.deltaTime;
+                if (timer > 0)
+                    return;
+                else
+                {
+                    float angle = Random.Range(-110, 110);
+                    transform.Rotate(0, angle, 0);
+                }
+            }
+        }
 }

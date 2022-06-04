@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SlimeAI_v2 : MonoBehaviour
 {
     UnityEngine.AI.NavMeshAgent agent;
     GameObject player;
+    Scene currScene;
 
     private float obstacleRange = 3.0f;
     private float changeDirectionTimer = 1.2f;
@@ -13,6 +15,7 @@ public class SlimeAI_v2 : MonoBehaviour
 
     // Values to compare against player distance to determine the
     // state the agent should be in
+    private string sceneName;
     public float ChaseDist = 15.0f; // Distance at which agent chases Player
     public float WanderMax = 45.0f; // Max Dist from player where the enemy will still wander
 
@@ -28,6 +31,8 @@ public class SlimeAI_v2 : MonoBehaviour
     {
       agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
       player = GameObject.FindGameObjectWithTag("Player");
+      currScene = SceneManager.GetActiveScene();
+      sceneName = currScene.name;
     
       // Set Animator
       _animator = GetComponent<Animator>();
@@ -78,46 +83,22 @@ public class SlimeAI_v2 : MonoBehaviour
                 _wander = false;
                 _chase = true;
             }
-            else
+            else if (sceneName == "level3 Cliffs")
             {
-                // logic to wander the map
-                // case for level 3, edges!
-                /*UnityEngine.AI.NavMeshHit hit1;
+                UnityEngine.AI.NavMeshHit hit1;
                 if (UnityEngine.AI.NavMesh.FindClosestEdge(transform.position, out hit1, UnityEngine.AI.NavMesh.AllAreas))
                 {
-                    if (hit1.distance < 1.5f)
+                    if (hit1.distance < 0.5f)
                     {
-                        transform.Rotate(0, 180, 0);
+                        float angle = Random.Range(155, 200);
+                        transform.Rotate(0, angle, 0);
                         timer = changeDirectionTimer;
                     }
                 }
-                else
-                {*/
-                transform.Translate(0, 0, agent.speed * Time.deltaTime);
-                var dist = Vector3.Distance(player.transform.position, transform.position);
-                Ray lookAhead = new Ray(transform.position, transform.forward);
-                RaycastHit hit;
-                if (Physics.SphereCast(lookAhead, 0.75f, out hit))
-                {
-                    if (hit.distance < obstacleRange)
-                    {
-                        float angle = Random.Range(-90, 90);
-                        transform.Rotate(0, angle, 0);
-                    }
-                    timer = changeDirectionTimer;
-                }
-                else
-                {
-                    timer -= Time.deltaTime;
-                    if (timer > 0)
-                        return;
-                    else
-                    {
-                        float angle = Random.Range(-110, 110);
-                        transform.Rotate(0, angle, 0);
-                    }
-                }
-                //}
+            }
+            else
+            {
+                wander();
             }
         }
 
@@ -142,5 +123,33 @@ public class SlimeAI_v2 : MonoBehaviour
         // Set animator states
         _animator.SetBool("_chase", _chase);
         _animator.SetBool("_wander", _wander);
+    }
+
+    void wander()
+    {
+        transform.Translate(0, 0, agent.speed * Time.deltaTime);
+        var dist = Vector3.Distance(player.transform.position, transform.position);
+        Ray lookAhead = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        if (Physics.SphereCast(lookAhead, 0.75f, out hit))
+        {
+            if (hit.distance < obstacleRange)
+            {
+                float angle = Random.Range(-90, 90);
+                transform.Rotate(0, angle, 0);
+            }
+            timer = changeDirectionTimer;
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+            if (timer > 0)
+                return;
+            else
+            {
+                float angle = Random.Range(-110, 110);
+                transform.Rotate(0, angle, 0);
+            }
+        }
     }
 }

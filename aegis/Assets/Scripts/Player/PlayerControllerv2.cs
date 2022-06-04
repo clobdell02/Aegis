@@ -135,12 +135,6 @@ public class PlayerControllerv2 : MonoBehaviour
 
       if(direction.magnitude >= 0.1f)
       {
-        /*
-        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, smoothTurn);
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        */
-
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         Vector3 mvmt = moveDir.normalized * speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.LeftShift))
@@ -172,7 +166,7 @@ public class PlayerControllerv2 : MonoBehaviour
             float force = 750.0f;
 
             // detect enemies in a given range of the player
-            float range = 5.0f;
+            float range = 10.0f;
             for (int i = 0; i < selectables.Count; i++)
             {
                 // check for null
@@ -198,11 +192,11 @@ public class PlayerControllerv2 : MonoBehaviour
         else if (Input.GetMouseButtonDown(1) && (freeze == true))
         {
             Debug.Log("Freeze used!");
-            frozen_timer = 3.0f;
+            frozen_timer = 5.0f;
             freeze = false;
             SetPowerUpText();
             // get all enemies within range
-            float range = 5.0f;
+            float range = 10.0f;
             for (int i = 0; i < selectables.Count; i++)
             {
                 // check for null
