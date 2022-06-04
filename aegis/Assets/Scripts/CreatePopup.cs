@@ -16,6 +16,7 @@ public class CreatePopup : MonoBehaviour
       if(other.gameObject.CompareTag("Player"))
       {
         popup.SetActive(true);
+        //
       }
     }
 }
